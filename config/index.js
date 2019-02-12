@@ -14,7 +14,7 @@ module.exports = {
     //路由接口代理配置
     proxyTable: {
       '/api': {
-        target: 'https://localhost:8082',
+        target: 'http://localhost:8082',
         changeOrigin: true,
         pathRewrite: {
             '^/api': ''

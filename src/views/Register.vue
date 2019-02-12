@@ -17,11 +17,8 @@
         icon="locked"
       ></mu-text-field><br />
       <mu-container>
-        <mu-button
-          color="primary"
-          v-on:click="login()"
-        >登陆</mu-button>
-        <mu-button color="primary" v-on:click="goRegister()">注册</mu-button>
+        <mu-button color="primary"
+        v-on:click="register()">提交</mu-button>
       </mu-container>
 
     </mu-container>
@@ -38,34 +35,34 @@ export default {
     };
   },
   methods: {
-    login(){ //方法
+    register(){ //方法
       // console.log(this.loginInfo);
       let name = this.loginInfo.username;
+      alert(name);
       let pass = this.loginInfo.password;
-      alert(name+pass);
       if(""!=name&&""!=pass){
-        this.$axios.post("/user/login",{
-          "username": this.loginInfo.username,
-          "password": this.loginInfo.password,
-        }).then(response => {
-            // console.log(response.data)
-            if(response.data.code==0){
-              this.$store.commit('ADD_ACCOUNT',response.data.token)
-              this.$store.commit('GET_USER',name)
-              alert("欢迎，"+name)
-              this.$router.push("/")
+        this.$axios.post("user/register",{
+          id: "",
+          username: name,
+          password: pass,
+        }).then((response) => {
+            console.log(response)
+            if(response.data==1){
+            //   this.$store.commit('ADD_ACCOUNT',response.data.msg)
+            //   this.$store.commit('GET_USER',name)
+            alert("欢迎登陆");
+            //   alert("欢迎登陆，"+name)
+              this.$router.push("/user")
             }else{
               //登陆失败
-              alert(response.data.msg)
+              alert("注册失败")
+              alert(response)
             }
         })
       }
       else{
         alert("用户名或密码不能为空");
       }
-    },
-    goRegister(){
-      this.$router.push("/register")
     }
   }
 };

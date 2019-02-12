@@ -9,6 +9,7 @@ import Album from '@/views/Album'
 import About from '@/views/About'
 import Index from '@/views/Index'
 import Test from '@/views/Test'
+import Register from '@/views/Register'
 
 Vue.use(Router)
 
@@ -18,6 +19,11 @@ export default new Router({
       path: '/test',
       name: 'Test',
       component: Test
+    },
+    {
+      path: '/register',
+      name: 'Register',
+      component: Register
     },
     {
       path: '/publicheader',
